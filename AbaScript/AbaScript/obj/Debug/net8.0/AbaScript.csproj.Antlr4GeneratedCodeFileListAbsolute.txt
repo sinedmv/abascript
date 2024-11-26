@@ -1,0 +1,6 @@
+C:\Users\raybe\abascript\AbaScript\AbaScript\obj\Debug\net8.0\AbaScriptLexer.cs
+C:\Users\raybe\abascript\AbaScript\AbaScript\obj\Debug\net8.0\AbaScriptParser.cs
+C:\Users\raybe\abascript\AbaScript\AbaScript\obj\Debug\net8.0\AbaScriptListener.cs
+C:\Users\raybe\abascript\AbaScript\AbaScript\obj\Debug\net8.0\AbaScriptBaseListener.cs
+C:\Users\raybe\abascript\AbaScript\AbaScript\obj\Debug\net8.0\AbaScriptVisitor.cs
+C:\Users\raybe\abascript\AbaScript\AbaScript\obj\Debug\net8.0\AbaScriptBaseVisitor.cs
