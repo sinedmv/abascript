@@ -32,6 +32,45 @@ using IToken = Antlr4.Runtime.IToken;
 [System.CLSCompliant(false)]
 public interface IAbaScriptListener : IParseTreeListener {
 	/// <summary>
+	/// Enter a parse tree produced by the <c>AndExpr</c>
+	/// labeled alternative in <see cref="AbaScriptParser.logicalExpr"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterAndExpr([NotNull] AbaScriptParser.AndExprContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>AndExpr</c>
+	/// labeled alternative in <see cref="AbaScriptParser.logicalExpr"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitAndExpr([NotNull] AbaScriptParser.AndExprContext context);
+
+	/// <summary>
+	/// Enter a parse tree produced by the <c>OrExpr</c>
+	/// labeled alternative in <see cref="AbaScriptParser.logicalExpr"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterOrExpr([NotNull] AbaScriptParser.OrExprContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>OrExpr</c>
+	/// labeled alternative in <see cref="AbaScriptParser.logicalExpr"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitOrExpr([NotNull] AbaScriptParser.OrExprContext context);
+
+	/// <summary>
+	/// Enter a parse tree produced by the <c>ConditionExpr</c>
+	/// labeled alternative in <see cref="AbaScriptParser.logicalExpr"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterConditionExpr([NotNull] AbaScriptParser.ConditionExprContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>ConditionExpr</c>
+	/// labeled alternative in <see cref="AbaScriptParser.logicalExpr"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitConditionExpr([NotNull] AbaScriptParser.ConditionExprContext context);
+
+	/// <summary>
 	/// Enter a parse tree produced by the <c>AddSub</c>
 	/// labeled alternative in <see cref="AbaScriptParser.expr"/>.
 	/// </summary>
@@ -290,6 +329,17 @@ public interface IAbaScriptListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitBlock([NotNull] AbaScriptParser.BlockContext context);
+
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="AbaScriptParser.logicalExpr"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterLogicalExpr([NotNull] AbaScriptParser.LogicalExprContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="AbaScriptParser.logicalExpr"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitLogicalExpr([NotNull] AbaScriptParser.LogicalExprContext context);
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="AbaScriptParser.condition"/>.

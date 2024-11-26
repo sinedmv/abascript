@@ -33,6 +33,30 @@ using IToken = Antlr4.Runtime.IToken;
 [System.CLSCompliant(false)]
 public interface IAbaScriptVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <summary>
+	/// Visit a parse tree produced by the <c>AndExpr</c>
+	/// labeled alternative in <see cref="AbaScriptParser.logicalExpr"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitAndExpr([NotNull] AbaScriptParser.AndExprContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by the <c>OrExpr</c>
+	/// labeled alternative in <see cref="AbaScriptParser.logicalExpr"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitOrExpr([NotNull] AbaScriptParser.OrExprContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by the <c>ConditionExpr</c>
+	/// labeled alternative in <see cref="AbaScriptParser.logicalExpr"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitConditionExpr([NotNull] AbaScriptParser.ConditionExprContext context);
+
+	/// <summary>
 	/// Visit a parse tree produced by the <c>AddSub</c>
 	/// labeled alternative in <see cref="AbaScriptParser.expr"/>.
 	/// </summary>
@@ -194,6 +218,13 @@ public interface IAbaScriptVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitBlock([NotNull] AbaScriptParser.BlockContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="AbaScriptParser.logicalExpr"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitLogicalExpr([NotNull] AbaScriptParser.LogicalExprContext context);
 
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="AbaScriptParser.condition"/>.

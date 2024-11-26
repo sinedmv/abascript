@@ -77,11 +77,65 @@ public class AbaScriptCustomVisitor : AbaScriptBaseVisitor<object>
         throw new InvalidOperationException($"Несовместимые типы для операции '-': {left}, {right}");
     }
     
+    public override object VisitMulDivMod(AbaScriptParser.MulDivModContext context)
+    {
+        var left = Visit(context.term());
+        var right = Visit(context.factor());
+
+        // Determine the operator by checking the text of the middle child
+        var operatorText = context.GetChild(1).GetText();
+
+        Console.WriteLine($"DEBUG: left={left}, right={right}, leftType={left?.GetType()}, rightType={right?.GetType()}");
+
+        return operatorText switch
+        {
+            "*" => Multiply(left, right),
+            "/" => Divide(left, right),
+            "%" => Modulus(left, right),
+            _ => throw new InvalidOperationException("Unsupported operation")
+        };
+    }
+
+    private object Multiply(object left, object right)
+    {
+        if (left is int leftInt && right is int rightInt)
+        {
+            return leftInt * rightInt;
+        }
+        throw new InvalidOperationException($"Несовместимые типы для операции '*': {left}, {right}");
+    }
+
+    private object Divide(object left, object right)
+    {
+        if (left is int leftInt && right is int rightInt)
+        {
+            if (rightInt == 0)
+            {
+                throw new DivideByZeroException("Деление на ноль невозможно.");
+            }
+            return leftInt / rightInt;
+        }
+        throw new InvalidOperationException($"Несовместимые типы для операции '/': {left}, {right}");
+    }
+
+    private object Modulus(object left, object right)
+    {
+        if (left is int leftInt && right is int rightInt)
+        {
+            if (rightInt == 0)
+            {
+                throw new DivideByZeroException("Деление на ноль невозможно.");
+            }
+            return leftInt % rightInt;
+        }
+        throw new InvalidOperationException($"Несовместимые типы для операции '%': {left}, {right}");
+    }
+    
     public override object VisitIfStatement(AbaScriptParser.IfStatementContext context)
     {
-        for (int i = 0; i < context.condition().Length; i++)
+        for (int i = 0; i < context.logicalExpr().Length; i++)
         {
-            var conditionResult = (bool)Visit(context.condition(i));
+            var conditionResult = (bool)Visit(context.logicalExpr(i));
             if (conditionResult)
             {
                 Visit(context.block(i));
@@ -89,12 +143,35 @@ public class AbaScriptCustomVisitor : AbaScriptBaseVisitor<object>
             }
         }
 
-        if (context.block().Length > context.condition().Length)
+        if (context.block().Length > context.logicalExpr().Length)
         {
-            Visit(context.block(context.condition().Length)); // Блок else
+            Visit(context.block(context.logicalExpr().Length)); // Блок else
         }
 
         return null;
+    }
+    
+    public override object VisitLogicalExpr(AbaScriptParser.LogicalExprContext context)
+    {
+        switch (context)
+        {
+            case AbaScriptParser.AndExprContext andExpr:
+            {
+                var left = (bool)Visit(andExpr.logicalExpr());
+                var right = (bool)Visit(andExpr.condition());
+                return left && right;
+            }
+            case AbaScriptParser.OrExprContext orExpr:
+            {
+                var left = (bool)Visit(orExpr.logicalExpr());
+                var right = (bool)Visit(orExpr.condition());
+                return left || right;
+            }
+            case AbaScriptParser.ConditionExprContext conditionExpr:
+                return Visit(conditionExpr.condition());
+            default:
+                throw new InvalidOperationException("Unsupported logical expression");
+        }
     }
     
     public override object VisitCondition(AbaScriptParser.ConditionContext context)
@@ -144,7 +221,7 @@ public class AbaScriptCustomVisitor : AbaScriptBaseVisitor<object>
         while (true)
         {
             // Evaluate the loop condition
-            var conditionResult = Visit(context.condition());
+            var conditionResult = Visit(context.logicalExpr());
             if (conditionResult is not true)
             {
                 break;
@@ -163,9 +240,15 @@ public class AbaScriptCustomVisitor : AbaScriptBaseVisitor<object>
     {
         while (true)
         {
-            var conditionResult = Visit(context.condition());
-            if (conditionResult is not true)
+            var conditionResult = Visit(context.logicalExpr());
+            if (conditionResult is not bool boolResult)
+            {
+                throw new InvalidOperationException("The condition must evaluate to a boolean value.");
+            }
+            if (!boolResult)
+            {
                 break;
+            }
 
             try
             {
@@ -182,7 +265,6 @@ public class AbaScriptCustomVisitor : AbaScriptBaseVisitor<object>
         }
         return null;
     }
-
     public override object VisitBreakStatement(AbaScriptParser.BreakStatementContext context)
     {
         throw new BreakException();

@@ -34,33 +34,33 @@ public partial class AbaScriptParser : Parser {
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
 		T__9=10, T__10=11, T__11=12, T__12=13, T__13=14, T__14=15, T__15=16, T__16=17, 
 		T__17=18, T__18=19, T__19=20, T__20=21, T__21=22, T__22=23, T__23=24, 
-		T__24=25, T__25=26, T__26=27, T__27=28, T__28=29, T__29=30, ID=31, NUMBER=32, 
-		STRING=33, WS=34, COMMENT=35;
+		T__24=25, T__25=26, T__26=27, T__27=28, T__28=29, T__29=30, T__30=31, 
+		T__31=32, ID=33, NUMBER=34, STRING=35, WS=36, COMMENT=37;
 	public const int
 		RULE_script = 0, RULE_statement = 1, RULE_variableDeclaration = 2, RULE_assignment = 3, 
 		RULE_inputStatement = 4, RULE_outputStatement = 5, RULE_returnStatement = 6, 
 		RULE_ifStatement = 7, RULE_whileStatement = 8, RULE_forStatement = 9, 
-		RULE_functionDef = 10, RULE_funcCall = 11, RULE_block = 12, RULE_condition = 13, 
-		RULE_comparisonOp = 14, RULE_expr = 15, RULE_term = 16, RULE_factor = 17, 
-		RULE_breakStatement = 18, RULE_continueStatement = 19;
+		RULE_functionDef = 10, RULE_funcCall = 11, RULE_block = 12, RULE_logicalExpr = 13, 
+		RULE_condition = 14, RULE_comparisonOp = 15, RULE_expr = 16, RULE_term = 17, 
+		RULE_factor = 18, RULE_breakStatement = 19, RULE_continueStatement = 20;
 	public static readonly string[] ruleNames = {
 		"script", "statement", "variableDeclaration", "assignment", "inputStatement", 
 		"outputStatement", "returnStatement", "ifStatement", "whileStatement", 
-		"forStatement", "functionDef", "funcCall", "block", "condition", "comparisonOp", 
-		"expr", "term", "factor", "breakStatement", "continueStatement"
+		"forStatement", "functionDef", "funcCall", "block", "logicalExpr", "condition", 
+		"comparisonOp", "expr", "term", "factor", "breakStatement", "continueStatement"
 	};
 
 	private static readonly string[] _LiteralNames = {
 		null, "';'", "'var'", "'='", "'input'", "'('", "')'", "'print'", "'return'", 
 		"'if'", "'elif'", "'else'", "'while'", "'for'", "'func'", "','", "'{'", 
-		"'}'", "'=='", "'!='", "'<'", "'<='", "'>'", "'>='", "'+'", "'-'", "'*'", 
-		"'/'", "'%'", "'break'", "'continue'"
+		"'}'", "'&&'", "'||'", "'=='", "'!='", "'<'", "'<='", "'>'", "'>='", "'+'", 
+		"'-'", "'*'", "'/'", "'%'", "'break'", "'continue'"
 	};
 	private static readonly string[] _SymbolicNames = {
 		null, null, null, null, null, null, null, null, null, null, null, null, 
 		null, null, null, null, null, null, null, null, null, null, null, null, 
-		null, null, null, null, null, null, null, "ID", "NUMBER", "STRING", "WS", 
-		"COMMENT"
+		null, null, null, null, null, null, null, null, null, "ID", "NUMBER", 
+		"STRING", "WS", "COMMENT"
 	};
 	public static readonly IVocabulary DefaultVocabulary = new Vocabulary(_LiteralNames, _SymbolicNames);
 
@@ -154,12 +154,12 @@ public partial class AbaScriptParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 44;
+			State = 46;
 			_errHandler.Sync(this);
 			_la = _input.La(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__0) | (1L << T__1) | (1L << T__3) | (1L << T__6) | (1L << T__7) | (1L << T__8) | (1L << T__11) | (1L << T__12) | (1L << T__13) | (1L << T__28) | (1L << T__29) | (1L << ID))) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__0) | (1L << T__1) | (1L << T__3) | (1L << T__6) | (1L << T__7) | (1L << T__8) | (1L << T__11) | (1L << T__12) | (1L << T__13) | (1L << T__30) | (1L << T__31) | (1L << ID))) != 0)) {
 				{
-				State = 42;
+				State = 44;
 				_errHandler.Sync(this);
 				switch (_input.La(1)) {
 				case T__0:
@@ -170,27 +170,27 @@ public partial class AbaScriptParser : Parser {
 				case T__8:
 				case T__11:
 				case T__12:
-				case T__28:
-				case T__29:
+				case T__30:
+				case T__31:
 				case ID:
 					{
-					State = 40; statement();
+					State = 42; statement();
 					}
 					break;
 				case T__13:
 					{
-					State = 41; functionDef();
+					State = 43; functionDef();
 					}
 					break;
 				default:
 					throw new NoViableAltException(this);
 				}
 				}
-				State = 46;
+				State = 48;
 				_errHandler.Sync(this);
 				_la = _input.La(1);
 			}
-			State = 47; Match(Eof);
+			State = 49; Match(Eof);
 			}
 		}
 		catch (RecognitionException re) {
@@ -263,90 +263,90 @@ public partial class AbaScriptParser : Parser {
 		StatementContext _localctx = new StatementContext(_ctx, State);
 		EnterRule(_localctx, 2, RULE_statement);
 		try {
-			State = 61;
+			State = 63;
 			_errHandler.Sync(this);
 			switch ( Interpreter.AdaptivePredict(_input,2,_ctx) ) {
 			case 1:
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 49; variableDeclaration();
+				State = 51; variableDeclaration();
 				}
 				break;
 
 			case 2:
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 50; assignment();
+				State = 52; assignment();
 				}
 				break;
 
 			case 3:
 				EnterOuterAlt(_localctx, 3);
 				{
-				State = 51; inputStatement();
+				State = 53; inputStatement();
 				}
 				break;
 
 			case 4:
 				EnterOuterAlt(_localctx, 4);
 				{
-				State = 52; outputStatement();
+				State = 54; outputStatement();
 				}
 				break;
 
 			case 5:
 				EnterOuterAlt(_localctx, 5);
 				{
-				State = 53; ifStatement();
+				State = 55; ifStatement();
 				}
 				break;
 
 			case 6:
 				EnterOuterAlt(_localctx, 6);
 				{
-				State = 54; whileStatement();
+				State = 56; whileStatement();
 				}
 				break;
 
 			case 7:
 				EnterOuterAlt(_localctx, 7);
 				{
-				State = 55; forStatement();
+				State = 57; forStatement();
 				}
 				break;
 
 			case 8:
 				EnterOuterAlt(_localctx, 8);
 				{
-				State = 56; returnStatement();
+				State = 58; returnStatement();
 				}
 				break;
 
 			case 9:
 				EnterOuterAlt(_localctx, 9);
 				{
-				State = 57; funcCall();
+				State = 59; funcCall();
 				}
 				break;
 
 			case 10:
 				EnterOuterAlt(_localctx, 10);
 				{
-				State = 58; breakStatement();
+				State = 60; breakStatement();
 				}
 				break;
 
 			case 11:
 				EnterOuterAlt(_localctx, 11);
 				{
-				State = 59; continueStatement();
+				State = 61; continueStatement();
 				}
 				break;
 
 			case 12:
 				EnterOuterAlt(_localctx, 12);
 				{
-				State = 60; Match(T__0);
+				State = 62; Match(T__0);
 				}
 				break;
 			}
@@ -395,19 +395,19 @@ public partial class AbaScriptParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 63; Match(T__1);
-			State = 64; Match(ID);
-			State = 67;
+			State = 65; Match(T__1);
+			State = 66; Match(ID);
+			State = 69;
 			_errHandler.Sync(this);
 			_la = _input.La(1);
 			if (_la==T__2) {
 				{
-				State = 65; Match(T__2);
-				State = 66; expr(0);
+				State = 67; Match(T__2);
+				State = 68; expr(0);
 				}
 			}
 
-			State = 69; Match(T__0);
+			State = 71; Match(T__0);
 			}
 		}
 		catch (RecognitionException re) {
@@ -453,10 +453,10 @@ public partial class AbaScriptParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 71; Match(ID);
-			State = 72; Match(T__2);
-			State = 73; expr(0);
-			State = 74; Match(T__0);
+			State = 73; Match(ID);
+			State = 74; Match(T__2);
+			State = 75; expr(0);
+			State = 76; Match(T__0);
 			}
 		}
 		catch (RecognitionException re) {
@@ -499,11 +499,11 @@ public partial class AbaScriptParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 76; Match(T__3);
-			State = 77; Match(T__4);
-			State = 78; Match(ID);
-			State = 79; Match(T__5);
-			State = 80; Match(T__0);
+			State = 78; Match(T__3);
+			State = 79; Match(T__4);
+			State = 80; Match(ID);
+			State = 81; Match(T__5);
+			State = 82; Match(T__0);
 			}
 		}
 		catch (RecognitionException re) {
@@ -548,11 +548,11 @@ public partial class AbaScriptParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 82; Match(T__6);
-			State = 83; Match(T__4);
-			State = 84; expr(0);
-			State = 85; Match(T__5);
-			State = 86; Match(T__0);
+			State = 84; Match(T__6);
+			State = 85; Match(T__4);
+			State = 86; expr(0);
+			State = 87; Match(T__5);
+			State = 88; Match(T__0);
 			}
 		}
 		catch (RecognitionException re) {
@@ -597,9 +597,9 @@ public partial class AbaScriptParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 88; Match(T__7);
-			State = 89; expr(0);
-			State = 90; Match(T__0);
+			State = 90; Match(T__7);
+			State = 91; expr(0);
+			State = 92; Match(T__0);
 			}
 		}
 		catch (RecognitionException re) {
@@ -614,11 +614,11 @@ public partial class AbaScriptParser : Parser {
 	}
 
 	public partial class IfStatementContext : ParserRuleContext {
-		public ConditionContext[] condition() {
-			return GetRuleContexts<ConditionContext>();
+		public LogicalExprContext[] logicalExpr() {
+			return GetRuleContexts<LogicalExprContext>();
 		}
-		public ConditionContext condition(int i) {
-			return GetRuleContext<ConditionContext>(i);
+		public LogicalExprContext logicalExpr(int i) {
+			return GetRuleContext<LogicalExprContext>(i);
 		}
 		public BlockContext[] block() {
 			return GetRuleContexts<BlockContext>();
@@ -654,35 +654,35 @@ public partial class AbaScriptParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 92; Match(T__8);
-			State = 93; Match(T__4);
-			State = 94; condition();
-			State = 95; Match(T__5);
-			State = 96; block();
-			State = 105;
+			State = 94; Match(T__8);
+			State = 95; Match(T__4);
+			State = 96; logicalExpr(0);
+			State = 97; Match(T__5);
+			State = 98; block();
+			State = 107;
 			_errHandler.Sync(this);
 			_la = _input.La(1);
 			while (_la==T__9) {
 				{
 				{
-				State = 97; Match(T__9);
-				State = 98; Match(T__4);
-				State = 99; condition();
-				State = 100; Match(T__5);
-				State = 101; block();
+				State = 99; Match(T__9);
+				State = 100; Match(T__4);
+				State = 101; logicalExpr(0);
+				State = 102; Match(T__5);
+				State = 103; block();
 				}
 				}
-				State = 107;
+				State = 109;
 				_errHandler.Sync(this);
 				_la = _input.La(1);
 			}
-			State = 110;
+			State = 112;
 			_errHandler.Sync(this);
 			_la = _input.La(1);
 			if (_la==T__10) {
 				{
-				State = 108; Match(T__10);
-				State = 109; block();
+				State = 110; Match(T__10);
+				State = 111; block();
 				}
 			}
 
@@ -700,8 +700,8 @@ public partial class AbaScriptParser : Parser {
 	}
 
 	public partial class WhileStatementContext : ParserRuleContext {
-		public ConditionContext condition() {
-			return GetRuleContext<ConditionContext>(0);
+		public LogicalExprContext logicalExpr() {
+			return GetRuleContext<LogicalExprContext>(0);
 		}
 		public BlockContext block() {
 			return GetRuleContext<BlockContext>(0);
@@ -733,11 +733,11 @@ public partial class AbaScriptParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 112; Match(T__11);
-			State = 113; Match(T__4);
-			State = 114; condition();
-			State = 115; Match(T__5);
-			State = 116; block();
+			State = 114; Match(T__11);
+			State = 115; Match(T__4);
+			State = 116; logicalExpr(0);
+			State = 117; Match(T__5);
+			State = 118; block();
 			}
 		}
 		catch (RecognitionException re) {
@@ -764,8 +764,8 @@ public partial class AbaScriptParser : Parser {
 		public AssignmentContext assignment(int i) {
 			return GetRuleContext<AssignmentContext>(i);
 		}
-		public ConditionContext condition() {
-			return GetRuleContext<ConditionContext>(0);
+		public LogicalExprContext logicalExpr() {
+			return GetRuleContext<LogicalExprContext>(0);
 		}
 		public ForStatementContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
@@ -795,44 +795,44 @@ public partial class AbaScriptParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 118; Match(T__12);
-			State = 119; Match(T__4);
-			State = 122;
+			State = 120; Match(T__12);
+			State = 121; Match(T__4);
+			State = 124;
 			_errHandler.Sync(this);
 			switch ( Interpreter.AdaptivePredict(_input,6,_ctx) ) {
 			case 1:
 				{
-				State = 120; variableDeclaration();
+				State = 122; variableDeclaration();
 				}
 				break;
 
 			case 2:
 				{
-				State = 121; assignment();
+				State = 123; assignment();
 				}
 				break;
 			}
-			State = 125;
+			State = 127;
 			_errHandler.Sync(this);
 			_la = _input.La(1);
 			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__4) | (1L << ID) | (1L << NUMBER) | (1L << STRING))) != 0)) {
 				{
-				State = 124; condition();
+				State = 126; logicalExpr(0);
 				}
 			}
 
-			State = 127; Match(T__0);
-			State = 129;
+			State = 129; Match(T__0);
+			State = 131;
 			_errHandler.Sync(this);
 			_la = _input.La(1);
 			if (_la==ID) {
 				{
-				State = 128; assignment();
+				State = 130; assignment();
 				}
 			}
 
-			State = 131; Match(T__5);
-			State = 132; block();
+			State = 133; Match(T__5);
+			State = 134; block();
 			}
 		}
 		catch (RecognitionException re) {
@@ -882,34 +882,34 @@ public partial class AbaScriptParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 134; Match(T__13);
-			State = 135; Match(ID);
-			State = 136; Match(T__4);
-			State = 145;
+			State = 136; Match(T__13);
+			State = 137; Match(ID);
+			State = 138; Match(T__4);
+			State = 147;
 			_errHandler.Sync(this);
 			_la = _input.La(1);
 			if (_la==ID) {
 				{
-				State = 137; Match(ID);
-				State = 142;
+				State = 139; Match(ID);
+				State = 144;
 				_errHandler.Sync(this);
 				_la = _input.La(1);
 				while (_la==T__14) {
 					{
 					{
-					State = 138; Match(T__14);
-					State = 139; Match(ID);
+					State = 140; Match(T__14);
+					State = 141; Match(ID);
 					}
 					}
-					State = 144;
+					State = 146;
 					_errHandler.Sync(this);
 					_la = _input.La(1);
 				}
 				}
 			}
 
-			State = 147; Match(T__5);
-			State = 148; block();
+			State = 149; Match(T__5);
+			State = 150; block();
 			}
 		}
 		catch (RecognitionException re) {
@@ -959,33 +959,33 @@ public partial class AbaScriptParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 150; Match(ID);
-			State = 151; Match(T__4);
-			State = 160;
+			State = 152; Match(ID);
+			State = 153; Match(T__4);
+			State = 162;
 			_errHandler.Sync(this);
 			_la = _input.La(1);
 			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__4) | (1L << ID) | (1L << NUMBER) | (1L << STRING))) != 0)) {
 				{
-				State = 152; expr(0);
-				State = 157;
+				State = 154; expr(0);
+				State = 159;
 				_errHandler.Sync(this);
 				_la = _input.La(1);
 				while (_la==T__14) {
 					{
 					{
-					State = 153; Match(T__14);
-					State = 154; expr(0);
+					State = 155; Match(T__14);
+					State = 156; expr(0);
 					}
 					}
-					State = 159;
+					State = 161;
 					_errHandler.Sync(this);
 					_la = _input.La(1);
 				}
 				}
 			}
 
-			State = 162; Match(T__5);
-			State = 163; Match(T__0);
+			State = 164; Match(T__5);
+			State = 165; Match(T__0);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1040,33 +1040,33 @@ public partial class AbaScriptParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 165; Match(T__15);
-			State = 170;
+			State = 167; Match(T__15);
+			State = 172;
 			_errHandler.Sync(this);
 			_la = _input.La(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__0) | (1L << T__1) | (1L << T__3) | (1L << T__6) | (1L << T__7) | (1L << T__8) | (1L << T__11) | (1L << T__12) | (1L << T__28) | (1L << T__29) | (1L << ID))) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__0) | (1L << T__1) | (1L << T__3) | (1L << T__6) | (1L << T__7) | (1L << T__8) | (1L << T__11) | (1L << T__12) | (1L << T__30) | (1L << T__31) | (1L << ID))) != 0)) {
 				{
-				State = 168;
+				State = 170;
 				_errHandler.Sync(this);
 				switch ( Interpreter.AdaptivePredict(_input,13,_ctx) ) {
 				case 1:
 					{
-					State = 166; statement();
+					State = 168; statement();
 					}
 					break;
 
 				case 2:
 					{
-					State = 167; funcCall();
+					State = 169; funcCall();
 					}
 					break;
 				}
 				}
-				State = 172;
+				State = 174;
 				_errHandler.Sync(this);
 				_la = _input.La(1);
 			}
-			State = 173; Match(T__16);
+			State = 175; Match(T__16);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1076,6 +1076,158 @@ public partial class AbaScriptParser : Parser {
 		}
 		finally {
 			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class LogicalExprContext : ParserRuleContext {
+		public LogicalExprContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_logicalExpr; } }
+	 
+		public LogicalExprContext() { }
+		public virtual void CopyFrom(LogicalExprContext context) {
+			base.CopyFrom(context);
+		}
+	}
+	public partial class AndExprContext : LogicalExprContext {
+		public LogicalExprContext logicalExpr() {
+			return GetRuleContext<LogicalExprContext>(0);
+		}
+		public ConditionContext condition() {
+			return GetRuleContext<ConditionContext>(0);
+		}
+		public AndExprContext(LogicalExprContext context) { CopyFrom(context); }
+		public override void EnterRule(IParseTreeListener listener) {
+			IAbaScriptListener typedListener = listener as IAbaScriptListener;
+			if (typedListener != null) typedListener.EnterAndExpr(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IAbaScriptListener typedListener = listener as IAbaScriptListener;
+			if (typedListener != null) typedListener.ExitAndExpr(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IAbaScriptVisitor<TResult> typedVisitor = visitor as IAbaScriptVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAndExpr(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+	public partial class OrExprContext : LogicalExprContext {
+		public LogicalExprContext logicalExpr() {
+			return GetRuleContext<LogicalExprContext>(0);
+		}
+		public ConditionContext condition() {
+			return GetRuleContext<ConditionContext>(0);
+		}
+		public OrExprContext(LogicalExprContext context) { CopyFrom(context); }
+		public override void EnterRule(IParseTreeListener listener) {
+			IAbaScriptListener typedListener = listener as IAbaScriptListener;
+			if (typedListener != null) typedListener.EnterOrExpr(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IAbaScriptListener typedListener = listener as IAbaScriptListener;
+			if (typedListener != null) typedListener.ExitOrExpr(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IAbaScriptVisitor<TResult> typedVisitor = visitor as IAbaScriptVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOrExpr(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+	public partial class ConditionExprContext : LogicalExprContext {
+		public ConditionContext condition() {
+			return GetRuleContext<ConditionContext>(0);
+		}
+		public ConditionExprContext(LogicalExprContext context) { CopyFrom(context); }
+		public override void EnterRule(IParseTreeListener listener) {
+			IAbaScriptListener typedListener = listener as IAbaScriptListener;
+			if (typedListener != null) typedListener.EnterConditionExpr(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IAbaScriptListener typedListener = listener as IAbaScriptListener;
+			if (typedListener != null) typedListener.ExitConditionExpr(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IAbaScriptVisitor<TResult> typedVisitor = visitor as IAbaScriptVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitConditionExpr(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public LogicalExprContext logicalExpr() {
+		return logicalExpr(0);
+	}
+
+	private LogicalExprContext logicalExpr(int _p) {
+		ParserRuleContext _parentctx = _ctx;
+		int _parentState = State;
+		LogicalExprContext _localctx = new LogicalExprContext(_ctx, _parentState);
+		LogicalExprContext _prevctx = _localctx;
+		int _startState = 26;
+		EnterRecursionRule(_localctx, 26, RULE_logicalExpr, _p);
+		try {
+			int _alt;
+			EnterOuterAlt(_localctx, 1);
+			{
+			{
+			_localctx = new ConditionExprContext(_localctx);
+			_ctx = _localctx;
+			_prevctx = _localctx;
+
+			State = 178; condition();
+			}
+			_ctx.stop = _input.Lt(-1);
+			State = 188;
+			_errHandler.Sync(this);
+			_alt = Interpreter.AdaptivePredict(_input,16,_ctx);
+			while ( _alt!=2 && _alt!=global::Antlr4.Runtime.Atn.ATN.InvalidAltNumber ) {
+				if ( _alt==1 ) {
+					if ( _parseListeners!=null ) TriggerExitRuleEvent();
+					_prevctx = _localctx;
+					{
+					State = 186;
+					_errHandler.Sync(this);
+					switch ( Interpreter.AdaptivePredict(_input,15,_ctx) ) {
+					case 1:
+						{
+						_localctx = new AndExprContext(new LogicalExprContext(_parentctx, _parentState));
+						PushNewRecursionContext(_localctx, _startState, RULE_logicalExpr);
+						State = 180;
+						if (!(Precpred(_ctx, 3))) throw new FailedPredicateException(this, "Precpred(_ctx, 3)");
+						State = 181; Match(T__17);
+						State = 182; condition();
+						}
+						break;
+
+					case 2:
+						{
+						_localctx = new OrExprContext(new LogicalExprContext(_parentctx, _parentState));
+						PushNewRecursionContext(_localctx, _startState, RULE_logicalExpr);
+						State = 183;
+						if (!(Precpred(_ctx, 2))) throw new FailedPredicateException(this, "Precpred(_ctx, 2)");
+						State = 184; Match(T__18);
+						State = 185; condition();
+						}
+						break;
+					}
+					} 
+				}
+				State = 190;
+				_errHandler.Sync(this);
+				_alt = Interpreter.AdaptivePredict(_input,16,_ctx);
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.ReportError(this, re);
+			_errHandler.Recover(this, re);
+		}
+		finally {
+			UnrollRecursionContexts(_parentctx);
 		}
 		return _localctx;
 	}
@@ -1113,13 +1265,13 @@ public partial class AbaScriptParser : Parser {
 	[RuleVersion(0)]
 	public ConditionContext condition() {
 		ConditionContext _localctx = new ConditionContext(_ctx, State);
-		EnterRule(_localctx, 26, RULE_condition);
+		EnterRule(_localctx, 28, RULE_condition);
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 175; expr(0);
-			State = 176; comparisonOp();
-			State = 177; expr(0);
+			State = 191; expr(0);
+			State = 192; comparisonOp();
+			State = 193; expr(0);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1157,14 +1309,14 @@ public partial class AbaScriptParser : Parser {
 	[RuleVersion(0)]
 	public ComparisonOpContext comparisonOp() {
 		ComparisonOpContext _localctx = new ComparisonOpContext(_ctx, State);
-		EnterRule(_localctx, 28, RULE_comparisonOp);
+		EnterRule(_localctx, 30, RULE_comparisonOp);
 		int _la;
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 179;
+			State = 195;
 			_la = _input.La(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__17) | (1L << T__18) | (1L << T__19) | (1L << T__20) | (1L << T__21) | (1L << T__22))) != 0)) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__19) | (1L << T__20) | (1L << T__21) | (1L << T__22) | (1L << T__23) | (1L << T__24))) != 0)) ) {
 			_errHandler.RecoverInline(this);
 			} else {
 				if (_input.La(1) == TokenConstants.Eof) {
@@ -1251,8 +1403,8 @@ public partial class AbaScriptParser : Parser {
 		int _parentState = State;
 		ExprContext _localctx = new ExprContext(_ctx, _parentState);
 		ExprContext _prevctx = _localctx;
-		int _startState = 30;
-		EnterRecursionRule(_localctx, 30, RULE_expr, _p);
+		int _startState = 32;
+		EnterRecursionRule(_localctx, 32, RULE_expr, _p);
 		int _la;
 		try {
 			int _alt;
@@ -1263,12 +1415,12 @@ public partial class AbaScriptParser : Parser {
 			_ctx = _localctx;
 			_prevctx = _localctx;
 
-			State = 182; term(0);
+			State = 198; term(0);
 			}
 			_ctx.stop = _input.Lt(-1);
-			State = 189;
+			State = 205;
 			_errHandler.Sync(this);
-			_alt = Interpreter.AdaptivePredict(_input,15,_ctx);
+			_alt = Interpreter.AdaptivePredict(_input,17,_ctx);
 			while ( _alt!=2 && _alt!=global::Antlr4.Runtime.Atn.ATN.InvalidAltNumber ) {
 				if ( _alt==1 ) {
 					if ( _parseListeners!=null ) TriggerExitRuleEvent();
@@ -1277,11 +1429,11 @@ public partial class AbaScriptParser : Parser {
 					{
 					_localctx = new AddSubContext(new ExprContext(_parentctx, _parentState));
 					PushNewRecursionContext(_localctx, _startState, RULE_expr);
-					State = 184;
+					State = 200;
 					if (!(Precpred(_ctx, 2))) throw new FailedPredicateException(this, "Precpred(_ctx, 2)");
-					State = 185;
+					State = 201;
 					_la = _input.La(1);
-					if ( !(_la==T__23 || _la==T__24) ) {
+					if ( !(_la==T__25 || _la==T__26) ) {
 					_errHandler.RecoverInline(this);
 					} else {
 						if (_input.La(1) == TokenConstants.Eof) {
@@ -1291,13 +1443,13 @@ public partial class AbaScriptParser : Parser {
 						_errHandler.ReportMatch(this);
 						Consume();
 					}
-					State = 186; term(0);
+					State = 202; term(0);
 					}
 					} 
 				}
-				State = 191;
+				State = 207;
 				_errHandler.Sync(this);
-				_alt = Interpreter.AdaptivePredict(_input,15,_ctx);
+				_alt = Interpreter.AdaptivePredict(_input,17,_ctx);
 			}
 			}
 		}
@@ -1376,8 +1528,8 @@ public partial class AbaScriptParser : Parser {
 		int _parentState = State;
 		TermContext _localctx = new TermContext(_ctx, _parentState);
 		TermContext _prevctx = _localctx;
-		int _startState = 32;
-		EnterRecursionRule(_localctx, 32, RULE_term, _p);
+		int _startState = 34;
+		EnterRecursionRule(_localctx, 34, RULE_term, _p);
 		int _la;
 		try {
 			int _alt;
@@ -1388,12 +1540,12 @@ public partial class AbaScriptParser : Parser {
 			_ctx = _localctx;
 			_prevctx = _localctx;
 
-			State = 193; factor();
+			State = 209; factor();
 			}
 			_ctx.stop = _input.Lt(-1);
-			State = 200;
+			State = 216;
 			_errHandler.Sync(this);
-			_alt = Interpreter.AdaptivePredict(_input,16,_ctx);
+			_alt = Interpreter.AdaptivePredict(_input,18,_ctx);
 			while ( _alt!=2 && _alt!=global::Antlr4.Runtime.Atn.ATN.InvalidAltNumber ) {
 				if ( _alt==1 ) {
 					if ( _parseListeners!=null ) TriggerExitRuleEvent();
@@ -1402,11 +1554,11 @@ public partial class AbaScriptParser : Parser {
 					{
 					_localctx = new MulDivModContext(new TermContext(_parentctx, _parentState));
 					PushNewRecursionContext(_localctx, _startState, RULE_term);
-					State = 195;
+					State = 211;
 					if (!(Precpred(_ctx, 2))) throw new FailedPredicateException(this, "Precpred(_ctx, 2)");
-					State = 196;
+					State = 212;
 					_la = _input.La(1);
-					if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__25) | (1L << T__26) | (1L << T__27))) != 0)) ) {
+					if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__27) | (1L << T__28) | (1L << T__29))) != 0)) ) {
 					_errHandler.RecoverInline(this);
 					} else {
 						if (_input.La(1) == TokenConstants.Eof) {
@@ -1416,13 +1568,13 @@ public partial class AbaScriptParser : Parser {
 						_errHandler.ReportMatch(this);
 						Consume();
 					}
-					State = 197; factor();
+					State = 213; factor();
 					}
 					} 
 				}
-				State = 202;
+				State = 218;
 				_errHandler.Sync(this);
-				_alt = Interpreter.AdaptivePredict(_input,16,_ctx);
+				_alt = Interpreter.AdaptivePredict(_input,18,_ctx);
 			}
 			}
 		}
@@ -1542,18 +1694,18 @@ public partial class AbaScriptParser : Parser {
 	[RuleVersion(0)]
 	public FactorContext factor() {
 		FactorContext _localctx = new FactorContext(_ctx, State);
-		EnterRule(_localctx, 34, RULE_factor);
+		EnterRule(_localctx, 36, RULE_factor);
 		try {
-			State = 211;
+			State = 227;
 			_errHandler.Sync(this);
-			switch ( Interpreter.AdaptivePredict(_input,17,_ctx) ) {
+			switch ( Interpreter.AdaptivePredict(_input,19,_ctx) ) {
 			case 1:
 				_localctx = new ParensContext(_localctx);
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 203; Match(T__4);
-				State = 204; expr(0);
-				State = 205; Match(T__5);
+				State = 219; Match(T__4);
+				State = 220; expr(0);
+				State = 221; Match(T__5);
 				}
 				break;
 
@@ -1561,7 +1713,7 @@ public partial class AbaScriptParser : Parser {
 				_localctx = new NumberContext(_localctx);
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 207; Match(NUMBER);
+				State = 223; Match(NUMBER);
 				}
 				break;
 
@@ -1569,7 +1721,7 @@ public partial class AbaScriptParser : Parser {
 				_localctx = new StringContext(_localctx);
 				EnterOuterAlt(_localctx, 3);
 				{
-				State = 208; Match(STRING);
+				State = 224; Match(STRING);
 				}
 				break;
 
@@ -1577,7 +1729,7 @@ public partial class AbaScriptParser : Parser {
 				_localctx = new VariableContext(_localctx);
 				EnterOuterAlt(_localctx, 4);
 				{
-				State = 209; Match(ID);
+				State = 225; Match(ID);
 				}
 				break;
 
@@ -1585,7 +1737,7 @@ public partial class AbaScriptParser : Parser {
 				_localctx = new FunctionCallContext(_localctx);
 				EnterOuterAlt(_localctx, 5);
 				{
-				State = 210; funcCall();
+				State = 226; funcCall();
 				}
 				break;
 			}
@@ -1625,12 +1777,12 @@ public partial class AbaScriptParser : Parser {
 	[RuleVersion(0)]
 	public BreakStatementContext breakStatement() {
 		BreakStatementContext _localctx = new BreakStatementContext(_ctx, State);
-		EnterRule(_localctx, 36, RULE_breakStatement);
+		EnterRule(_localctx, 38, RULE_breakStatement);
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 213; Match(T__28);
-			State = 214; Match(T__0);
+			State = 229; Match(T__30);
+			State = 230; Match(T__0);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1668,12 +1820,12 @@ public partial class AbaScriptParser : Parser {
 	[RuleVersion(0)]
 	public ContinueStatementContext continueStatement() {
 		ContinueStatementContext _localctx = new ContinueStatementContext(_ctx, State);
-		EnterRule(_localctx, 38, RULE_continueStatement);
+		EnterRule(_localctx, 40, RULE_continueStatement);
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 216; Match(T__29);
-			State = 217; Match(T__0);
+			State = 232; Match(T__31);
+			State = 233; Match(T__0);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1689,106 +1841,124 @@ public partial class AbaScriptParser : Parser {
 
 	public override bool Sempred(RuleContext _localctx, int ruleIndex, int predIndex) {
 		switch (ruleIndex) {
-		case 15: return expr_sempred((ExprContext)_localctx, predIndex);
+		case 13: return logicalExpr_sempred((LogicalExprContext)_localctx, predIndex);
 
-		case 16: return term_sempred((TermContext)_localctx, predIndex);
+		case 16: return expr_sempred((ExprContext)_localctx, predIndex);
+
+		case 17: return term_sempred((TermContext)_localctx, predIndex);
+		}
+		return true;
+	}
+	private bool logicalExpr_sempred(LogicalExprContext _localctx, int predIndex) {
+		switch (predIndex) {
+		case 0: return Precpred(_ctx, 3);
+
+		case 1: return Precpred(_ctx, 2);
 		}
 		return true;
 	}
 	private bool expr_sempred(ExprContext _localctx, int predIndex) {
 		switch (predIndex) {
-		case 0: return Precpred(_ctx, 2);
+		case 2: return Precpred(_ctx, 2);
 		}
 		return true;
 	}
 	private bool term_sempred(TermContext _localctx, int predIndex) {
 		switch (predIndex) {
-		case 1: return Precpred(_ctx, 2);
+		case 3: return Precpred(_ctx, 2);
 		}
 		return true;
 	}
 
 	public static readonly string _serializedATN =
-		"\x3\xAF6F\x8320\x479D\xB75C\x4880\x1605\x191C\xAB37\x3%\xDE\x4\x2\t\x2"+
+		"\x3\xAF6F\x8320\x479D\xB75C\x4880\x1605\x191C\xAB37\x3\'\xEE\x4\x2\t\x2"+
 		"\x4\x3\t\x3\x4\x4\t\x4\x4\x5\t\x5\x4\x6\t\x6\x4\a\t\a\x4\b\t\b\x4\t\t"+
 		"\t\x4\n\t\n\x4\v\t\v\x4\f\t\f\x4\r\t\r\x4\xE\t\xE\x4\xF\t\xF\x4\x10\t"+
 		"\x10\x4\x11\t\x11\x4\x12\t\x12\x4\x13\t\x13\x4\x14\t\x14\x4\x15\t\x15"+
-		"\x3\x2\x3\x2\a\x2-\n\x2\f\x2\xE\x2\x30\v\x2\x3\x2\x3\x2\x3\x3\x3\x3\x3"+
-		"\x3\x3\x3\x3\x3\x3\x3\x3\x3\x3\x3\x3\x3\x3\x3\x3\x3\x3\x3\x5\x3@\n\x3"+
-		"\x3\x4\x3\x4\x3\x4\x3\x4\x5\x4\x46\n\x4\x3\x4\x3\x4\x3\x5\x3\x5\x3\x5"+
-		"\x3\x5\x3\x5\x3\x6\x3\x6\x3\x6\x3\x6\x3\x6\x3\x6\x3\a\x3\a\x3\a\x3\a\x3"+
-		"\a\x3\a\x3\b\x3\b\x3\b\x3\b\x3\t\x3\t\x3\t\x3\t\x3\t\x3\t\x3\t\x3\t\x3"+
-		"\t\x3\t\x3\t\a\tj\n\t\f\t\xE\tm\v\t\x3\t\x3\t\x5\tq\n\t\x3\n\x3\n\x3\n"+
-		"\x3\n\x3\n\x3\n\x3\v\x3\v\x3\v\x3\v\x5\v}\n\v\x3\v\x5\v\x80\n\v\x3\v\x3"+
-		"\v\x5\v\x84\n\v\x3\v\x3\v\x3\v\x3\f\x3\f\x3\f\x3\f\x3\f\x3\f\a\f\x8F\n"+
-		"\f\f\f\xE\f\x92\v\f\x5\f\x94\n\f\x3\f\x3\f\x3\f\x3\r\x3\r\x3\r\x3\r\x3"+
-		"\r\a\r\x9E\n\r\f\r\xE\r\xA1\v\r\x5\r\xA3\n\r\x3\r\x3\r\x3\r\x3\xE\x3\xE"+
-		"\x3\xE\a\xE\xAB\n\xE\f\xE\xE\xE\xAE\v\xE\x3\xE\x3\xE\x3\xF\x3\xF\x3\xF"+
-		"\x3\xF\x3\x10\x3\x10\x3\x11\x3\x11\x3\x11\x3\x11\x3\x11\x3\x11\a\x11\xBE"+
-		"\n\x11\f\x11\xE\x11\xC1\v\x11\x3\x12\x3\x12\x3\x12\x3\x12\x3\x12\x3\x12"+
-		"\a\x12\xC9\n\x12\f\x12\xE\x12\xCC\v\x12\x3\x13\x3\x13\x3\x13\x3\x13\x3"+
-		"\x13\x3\x13\x3\x13\x3\x13\x5\x13\xD6\n\x13\x3\x14\x3\x14\x3\x14\x3\x15"+
-		"\x3\x15\x3\x15\x3\x15\x2\x2\x4 \"\x16\x2\x2\x4\x2\x6\x2\b\x2\n\x2\f\x2"+
-		"\xE\x2\x10\x2\x12\x2\x14\x2\x16\x2\x18\x2\x1A\x2\x1C\x2\x1E\x2 \x2\"\x2"+
-		"$\x2&\x2(\x2\x2\x5\x3\x2\x14\x19\x3\x2\x1A\x1B\x3\x2\x1C\x1E\xE9\x2.\x3"+
-		"\x2\x2\x2\x4?\x3\x2\x2\x2\x6\x41\x3\x2\x2\x2\bI\x3\x2\x2\x2\nN\x3\x2\x2"+
-		"\x2\fT\x3\x2\x2\x2\xEZ\x3\x2\x2\x2\x10^\x3\x2\x2\x2\x12r\x3\x2\x2\x2\x14"+
-		"x\x3\x2\x2\x2\x16\x88\x3\x2\x2\x2\x18\x98\x3\x2\x2\x2\x1A\xA7\x3\x2\x2"+
-		"\x2\x1C\xB1\x3\x2\x2\x2\x1E\xB5\x3\x2\x2\x2 \xB7\x3\x2\x2\x2\"\xC2\x3"+
-		"\x2\x2\x2$\xD5\x3\x2\x2\x2&\xD7\x3\x2\x2\x2(\xDA\x3\x2\x2\x2*-\x5\x4\x3"+
-		"\x2+-\x5\x16\f\x2,*\x3\x2\x2\x2,+\x3\x2\x2\x2-\x30\x3\x2\x2\x2.,\x3\x2"+
-		"\x2\x2./\x3\x2\x2\x2/\x31\x3\x2\x2\x2\x30.\x3\x2\x2\x2\x31\x32\a\x2\x2"+
-		"\x3\x32\x3\x3\x2\x2\x2\x33@\x5\x6\x4\x2\x34@\x5\b\x5\x2\x35@\x5\n\x6\x2"+
-		"\x36@\x5\f\a\x2\x37@\x5\x10\t\x2\x38@\x5\x12\n\x2\x39@\x5\x14\v\x2:@\x5"+
-		"\xE\b\x2;@\x5\x18\r\x2<@\x5&\x14\x2=@\x5(\x15\x2>@\a\x3\x2\x2?\x33\x3"+
-		"\x2\x2\x2?\x34\x3\x2\x2\x2?\x35\x3\x2\x2\x2?\x36\x3\x2\x2\x2?\x37\x3\x2"+
-		"\x2\x2?\x38\x3\x2\x2\x2?\x39\x3\x2\x2\x2?:\x3\x2\x2\x2?;\x3\x2\x2\x2?"+
-		"<\x3\x2\x2\x2?=\x3\x2\x2\x2?>\x3\x2\x2\x2@\x5\x3\x2\x2\x2\x41\x42\a\x4"+
-		"\x2\x2\x42\x45\a!\x2\x2\x43\x44\a\x5\x2\x2\x44\x46\x5 \x11\x2\x45\x43"+
-		"\x3\x2\x2\x2\x45\x46\x3\x2\x2\x2\x46G\x3\x2\x2\x2GH\a\x3\x2\x2H\a\x3\x2"+
-		"\x2\x2IJ\a!\x2\x2JK\a\x5\x2\x2KL\x5 \x11\x2LM\a\x3\x2\x2M\t\x3\x2\x2\x2"+
-		"NO\a\x6\x2\x2OP\a\a\x2\x2PQ\a!\x2\x2QR\a\b\x2\x2RS\a\x3\x2\x2S\v\x3\x2"+
-		"\x2\x2TU\a\t\x2\x2UV\a\a\x2\x2VW\x5 \x11\x2WX\a\b\x2\x2XY\a\x3\x2\x2Y"+
-		"\r\x3\x2\x2\x2Z[\a\n\x2\x2[\\\x5 \x11\x2\\]\a\x3\x2\x2]\xF\x3\x2\x2\x2"+
-		"^_\a\v\x2\x2_`\a\a\x2\x2`\x61\x5\x1C\xF\x2\x61\x62\a\b\x2\x2\x62k\x5\x1A"+
-		"\xE\x2\x63\x64\a\f\x2\x2\x64\x65\a\a\x2\x2\x65\x66\x5\x1C\xF\x2\x66g\a"+
-		"\b\x2\x2gh\x5\x1A\xE\x2hj\x3\x2\x2\x2i\x63\x3\x2\x2\x2jm\x3\x2\x2\x2k"+
-		"i\x3\x2\x2\x2kl\x3\x2\x2\x2lp\x3\x2\x2\x2mk\x3\x2\x2\x2no\a\r\x2\x2oq"+
-		"\x5\x1A\xE\x2pn\x3\x2\x2\x2pq\x3\x2\x2\x2q\x11\x3\x2\x2\x2rs\a\xE\x2\x2"+
-		"st\a\a\x2\x2tu\x5\x1C\xF\x2uv\a\b\x2\x2vw\x5\x1A\xE\x2w\x13\x3\x2\x2\x2"+
-		"xy\a\xF\x2\x2y|\a\a\x2\x2z}\x5\x6\x4\x2{}\x5\b\x5\x2|z\x3\x2\x2\x2|{\x3"+
-		"\x2\x2\x2|}\x3\x2\x2\x2}\x7F\x3\x2\x2\x2~\x80\x5\x1C\xF\x2\x7F~\x3\x2"+
-		"\x2\x2\x7F\x80\x3\x2\x2\x2\x80\x81\x3\x2\x2\x2\x81\x83\a\x3\x2\x2\x82"+
-		"\x84\x5\b\x5\x2\x83\x82\x3\x2\x2\x2\x83\x84\x3\x2\x2\x2\x84\x85\x3\x2"+
-		"\x2\x2\x85\x86\a\b\x2\x2\x86\x87\x5\x1A\xE\x2\x87\x15\x3\x2\x2\x2\x88"+
-		"\x89\a\x10\x2\x2\x89\x8A\a!\x2\x2\x8A\x93\a\a\x2\x2\x8B\x90\a!\x2\x2\x8C"+
-		"\x8D\a\x11\x2\x2\x8D\x8F\a!\x2\x2\x8E\x8C\x3\x2\x2\x2\x8F\x92\x3\x2\x2"+
-		"\x2\x90\x8E\x3\x2\x2\x2\x90\x91\x3\x2\x2\x2\x91\x94\x3\x2\x2\x2\x92\x90"+
-		"\x3\x2\x2\x2\x93\x8B\x3\x2\x2\x2\x93\x94\x3\x2\x2\x2\x94\x95\x3\x2\x2"+
-		"\x2\x95\x96\a\b\x2\x2\x96\x97\x5\x1A\xE\x2\x97\x17\x3\x2\x2\x2\x98\x99"+
-		"\a!\x2\x2\x99\xA2\a\a\x2\x2\x9A\x9F\x5 \x11\x2\x9B\x9C\a\x11\x2\x2\x9C"+
-		"\x9E\x5 \x11\x2\x9D\x9B\x3\x2\x2\x2\x9E\xA1\x3\x2\x2\x2\x9F\x9D\x3\x2"+
-		"\x2\x2\x9F\xA0\x3\x2\x2\x2\xA0\xA3\x3\x2\x2\x2\xA1\x9F\x3\x2\x2\x2\xA2"+
-		"\x9A\x3\x2\x2\x2\xA2\xA3\x3\x2\x2\x2\xA3\xA4\x3\x2\x2\x2\xA4\xA5\a\b\x2"+
-		"\x2\xA5\xA6\a\x3\x2\x2\xA6\x19\x3\x2\x2\x2\xA7\xAC\a\x12\x2\x2\xA8\xAB"+
-		"\x5\x4\x3\x2\xA9\xAB\x5\x18\r\x2\xAA\xA8\x3\x2\x2\x2\xAA\xA9\x3\x2\x2"+
-		"\x2\xAB\xAE\x3\x2\x2\x2\xAC\xAA\x3\x2\x2\x2\xAC\xAD\x3\x2\x2\x2\xAD\xAF"+
-		"\x3\x2\x2\x2\xAE\xAC\x3\x2\x2\x2\xAF\xB0\a\x13\x2\x2\xB0\x1B\x3\x2\x2"+
-		"\x2\xB1\xB2\x5 \x11\x2\xB2\xB3\x5\x1E\x10\x2\xB3\xB4\x5 \x11\x2\xB4\x1D"+
-		"\x3\x2\x2\x2\xB5\xB6\t\x2\x2\x2\xB6\x1F\x3\x2\x2\x2\xB7\xB8\b\x11\x1\x2"+
-		"\xB8\xB9\x5\"\x12\x2\xB9\xBF\x3\x2\x2\x2\xBA\xBB\f\x4\x2\x2\xBB\xBC\t"+
-		"\x3\x2\x2\xBC\xBE\x5\"\x12\x2\xBD\xBA\x3\x2\x2\x2\xBE\xC1\x3\x2\x2\x2"+
-		"\xBF\xBD\x3\x2\x2\x2\xBF\xC0\x3\x2\x2\x2\xC0!\x3\x2\x2\x2\xC1\xBF\x3\x2"+
-		"\x2\x2\xC2\xC3\b\x12\x1\x2\xC3\xC4\x5$\x13\x2\xC4\xCA\x3\x2\x2\x2\xC5"+
-		"\xC6\f\x4\x2\x2\xC6\xC7\t\x4\x2\x2\xC7\xC9\x5$\x13\x2\xC8\xC5\x3\x2\x2"+
-		"\x2\xC9\xCC\x3\x2\x2\x2\xCA\xC8\x3\x2\x2\x2\xCA\xCB\x3\x2\x2\x2\xCB#\x3"+
-		"\x2\x2\x2\xCC\xCA\x3\x2\x2\x2\xCD\xCE\a\a\x2\x2\xCE\xCF\x5 \x11\x2\xCF"+
-		"\xD0\a\b\x2\x2\xD0\xD6\x3\x2\x2\x2\xD1\xD6\a\"\x2\x2\xD2\xD6\a#\x2\x2"+
-		"\xD3\xD6\a!\x2\x2\xD4\xD6\x5\x18\r\x2\xD5\xCD\x3\x2\x2\x2\xD5\xD1\x3\x2"+
-		"\x2\x2\xD5\xD2\x3\x2\x2\x2\xD5\xD3\x3\x2\x2\x2\xD5\xD4\x3\x2\x2\x2\xD6"+
-		"%\x3\x2\x2\x2\xD7\xD8\a\x1F\x2\x2\xD8\xD9\a\x3\x2\x2\xD9\'\x3\x2\x2\x2"+
-		"\xDA\xDB\a \x2\x2\xDB\xDC\a\x3\x2\x2\xDC)\x3\x2\x2\x2\x14,.?\x45kp|\x7F"+
-		"\x83\x90\x93\x9F\xA2\xAA\xAC\xBF\xCA\xD5";
+		"\x4\x16\t\x16\x3\x2\x3\x2\a\x2/\n\x2\f\x2\xE\x2\x32\v\x2\x3\x2\x3\x2\x3"+
+		"\x3\x3\x3\x3\x3\x3\x3\x3\x3\x3\x3\x3\x3\x3\x3\x3\x3\x3\x3\x3\x3\x3\x3"+
+		"\x5\x3\x42\n\x3\x3\x4\x3\x4\x3\x4\x3\x4\x5\x4H\n\x4\x3\x4\x3\x4\x3\x5"+
+		"\x3\x5\x3\x5\x3\x5\x3\x5\x3\x6\x3\x6\x3\x6\x3\x6\x3\x6\x3\x6\x3\a\x3\a"+
+		"\x3\a\x3\a\x3\a\x3\a\x3\b\x3\b\x3\b\x3\b\x3\t\x3\t\x3\t\x3\t\x3\t\x3\t"+
+		"\x3\t\x3\t\x3\t\x3\t\x3\t\a\tl\n\t\f\t\xE\to\v\t\x3\t\x3\t\x5\ts\n\t\x3"+
+		"\n\x3\n\x3\n\x3\n\x3\n\x3\n\x3\v\x3\v\x3\v\x3\v\x5\v\x7F\n\v\x3\v\x5\v"+
+		"\x82\n\v\x3\v\x3\v\x5\v\x86\n\v\x3\v\x3\v\x3\v\x3\f\x3\f\x3\f\x3\f\x3"+
+		"\f\x3\f\a\f\x91\n\f\f\f\xE\f\x94\v\f\x5\f\x96\n\f\x3\f\x3\f\x3\f\x3\r"+
+		"\x3\r\x3\r\x3\r\x3\r\a\r\xA0\n\r\f\r\xE\r\xA3\v\r\x5\r\xA5\n\r\x3\r\x3"+
+		"\r\x3\r\x3\xE\x3\xE\x3\xE\a\xE\xAD\n\xE\f\xE\xE\xE\xB0\v\xE\x3\xE\x3\xE"+
+		"\x3\xF\x3\xF\x3\xF\x3\xF\x3\xF\x3\xF\x3\xF\x3\xF\x3\xF\a\xF\xBD\n\xF\f"+
+		"\xF\xE\xF\xC0\v\xF\x3\x10\x3\x10\x3\x10\x3\x10\x3\x11\x3\x11\x3\x12\x3"+
+		"\x12\x3\x12\x3\x12\x3\x12\x3\x12\a\x12\xCE\n\x12\f\x12\xE\x12\xD1\v\x12"+
+		"\x3\x13\x3\x13\x3\x13\x3\x13\x3\x13\x3\x13\a\x13\xD9\n\x13\f\x13\xE\x13"+
+		"\xDC\v\x13\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\x5"+
+		"\x14\xE6\n\x14\x3\x15\x3\x15\x3\x15\x3\x16\x3\x16\x3\x16\x3\x16\x2\x2"+
+		"\x5\x1C\"$\x17\x2\x2\x4\x2\x6\x2\b\x2\n\x2\f\x2\xE\x2\x10\x2\x12\x2\x14"+
+		"\x2\x16\x2\x18\x2\x1A\x2\x1C\x2\x1E\x2 \x2\"\x2$\x2&\x2(\x2*\x2\x2\x5"+
+		"\x3\x2\x16\x1B\x3\x2\x1C\x1D\x3\x2\x1E \xFA\x2\x30\x3\x2\x2\x2\x4\x41"+
+		"\x3\x2\x2\x2\x6\x43\x3\x2\x2\x2\bK\x3\x2\x2\x2\nP\x3\x2\x2\x2\fV\x3\x2"+
+		"\x2\x2\xE\\\x3\x2\x2\x2\x10`\x3\x2\x2\x2\x12t\x3\x2\x2\x2\x14z\x3\x2\x2"+
+		"\x2\x16\x8A\x3\x2\x2\x2\x18\x9A\x3\x2\x2\x2\x1A\xA9\x3\x2\x2\x2\x1C\xB3"+
+		"\x3\x2\x2\x2\x1E\xC1\x3\x2\x2\x2 \xC5\x3\x2\x2\x2\"\xC7\x3\x2\x2\x2$\xD2"+
+		"\x3\x2\x2\x2&\xE5\x3\x2\x2\x2(\xE7\x3\x2\x2\x2*\xEA\x3\x2\x2\x2,/\x5\x4"+
+		"\x3\x2-/\x5\x16\f\x2.,\x3\x2\x2\x2.-\x3\x2\x2\x2/\x32\x3\x2\x2\x2\x30"+
+		".\x3\x2\x2\x2\x30\x31\x3\x2\x2\x2\x31\x33\x3\x2\x2\x2\x32\x30\x3\x2\x2"+
+		"\x2\x33\x34\a\x2\x2\x3\x34\x3\x3\x2\x2\x2\x35\x42\x5\x6\x4\x2\x36\x42"+
+		"\x5\b\x5\x2\x37\x42\x5\n\x6\x2\x38\x42\x5\f\a\x2\x39\x42\x5\x10\t\x2:"+
+		"\x42\x5\x12\n\x2;\x42\x5\x14\v\x2<\x42\x5\xE\b\x2=\x42\x5\x18\r\x2>\x42"+
+		"\x5(\x15\x2?\x42\x5*\x16\x2@\x42\a\x3\x2\x2\x41\x35\x3\x2\x2\x2\x41\x36"+
+		"\x3\x2\x2\x2\x41\x37\x3\x2\x2\x2\x41\x38\x3\x2\x2\x2\x41\x39\x3\x2\x2"+
+		"\x2\x41:\x3\x2\x2\x2\x41;\x3\x2\x2\x2\x41<\x3\x2\x2\x2\x41=\x3\x2\x2\x2"+
+		"\x41>\x3\x2\x2\x2\x41?\x3\x2\x2\x2\x41@\x3\x2\x2\x2\x42\x5\x3\x2\x2\x2"+
+		"\x43\x44\a\x4\x2\x2\x44G\a#\x2\x2\x45\x46\a\x5\x2\x2\x46H\x5\"\x12\x2"+
+		"G\x45\x3\x2\x2\x2GH\x3\x2\x2\x2HI\x3\x2\x2\x2IJ\a\x3\x2\x2J\a\x3\x2\x2"+
+		"\x2KL\a#\x2\x2LM\a\x5\x2\x2MN\x5\"\x12\x2NO\a\x3\x2\x2O\t\x3\x2\x2\x2"+
+		"PQ\a\x6\x2\x2QR\a\a\x2\x2RS\a#\x2\x2ST\a\b\x2\x2TU\a\x3\x2\x2U\v\x3\x2"+
+		"\x2\x2VW\a\t\x2\x2WX\a\a\x2\x2XY\x5\"\x12\x2YZ\a\b\x2\x2Z[\a\x3\x2\x2"+
+		"[\r\x3\x2\x2\x2\\]\a\n\x2\x2]^\x5\"\x12\x2^_\a\x3\x2\x2_\xF\x3\x2\x2\x2"+
+		"`\x61\a\v\x2\x2\x61\x62\a\a\x2\x2\x62\x63\x5\x1C\xF\x2\x63\x64\a\b\x2"+
+		"\x2\x64m\x5\x1A\xE\x2\x65\x66\a\f\x2\x2\x66g\a\a\x2\x2gh\x5\x1C\xF\x2"+
+		"hi\a\b\x2\x2ij\x5\x1A\xE\x2jl\x3\x2\x2\x2k\x65\x3\x2\x2\x2lo\x3\x2\x2"+
+		"\x2mk\x3\x2\x2\x2mn\x3\x2\x2\x2nr\x3\x2\x2\x2om\x3\x2\x2\x2pq\a\r\x2\x2"+
+		"qs\x5\x1A\xE\x2rp\x3\x2\x2\x2rs\x3\x2\x2\x2s\x11\x3\x2\x2\x2tu\a\xE\x2"+
+		"\x2uv\a\a\x2\x2vw\x5\x1C\xF\x2wx\a\b\x2\x2xy\x5\x1A\xE\x2y\x13\x3\x2\x2"+
+		"\x2z{\a\xF\x2\x2{~\a\a\x2\x2|\x7F\x5\x6\x4\x2}\x7F\x5\b\x5\x2~|\x3\x2"+
+		"\x2\x2~}\x3\x2\x2\x2~\x7F\x3\x2\x2\x2\x7F\x81\x3\x2\x2\x2\x80\x82\x5\x1C"+
+		"\xF\x2\x81\x80\x3\x2\x2\x2\x81\x82\x3\x2\x2\x2\x82\x83\x3\x2\x2\x2\x83"+
+		"\x85\a\x3\x2\x2\x84\x86\x5\b\x5\x2\x85\x84\x3\x2\x2\x2\x85\x86\x3\x2\x2"+
+		"\x2\x86\x87\x3\x2\x2\x2\x87\x88\a\b\x2\x2\x88\x89\x5\x1A\xE\x2\x89\x15"+
+		"\x3\x2\x2\x2\x8A\x8B\a\x10\x2\x2\x8B\x8C\a#\x2\x2\x8C\x95\a\a\x2\x2\x8D"+
+		"\x92\a#\x2\x2\x8E\x8F\a\x11\x2\x2\x8F\x91\a#\x2\x2\x90\x8E\x3\x2\x2\x2"+
+		"\x91\x94\x3\x2\x2\x2\x92\x90\x3\x2\x2\x2\x92\x93\x3\x2\x2\x2\x93\x96\x3"+
+		"\x2\x2\x2\x94\x92\x3\x2\x2\x2\x95\x8D\x3\x2\x2\x2\x95\x96\x3\x2\x2\x2"+
+		"\x96\x97\x3\x2\x2\x2\x97\x98\a\b\x2\x2\x98\x99\x5\x1A\xE\x2\x99\x17\x3"+
+		"\x2\x2\x2\x9A\x9B\a#\x2\x2\x9B\xA4\a\a\x2\x2\x9C\xA1\x5\"\x12\x2\x9D\x9E"+
+		"\a\x11\x2\x2\x9E\xA0\x5\"\x12\x2\x9F\x9D\x3\x2\x2\x2\xA0\xA3\x3\x2\x2"+
+		"\x2\xA1\x9F\x3\x2\x2\x2\xA1\xA2\x3\x2\x2\x2\xA2\xA5\x3\x2\x2\x2\xA3\xA1"+
+		"\x3\x2\x2\x2\xA4\x9C\x3\x2\x2\x2\xA4\xA5\x3\x2\x2\x2\xA5\xA6\x3\x2\x2"+
+		"\x2\xA6\xA7\a\b\x2\x2\xA7\xA8\a\x3\x2\x2\xA8\x19\x3\x2\x2\x2\xA9\xAE\a"+
+		"\x12\x2\x2\xAA\xAD\x5\x4\x3\x2\xAB\xAD\x5\x18\r\x2\xAC\xAA\x3\x2\x2\x2"+
+		"\xAC\xAB\x3\x2\x2\x2\xAD\xB0\x3\x2\x2\x2\xAE\xAC\x3\x2\x2\x2\xAE\xAF\x3"+
+		"\x2\x2\x2\xAF\xB1\x3\x2\x2\x2\xB0\xAE\x3\x2\x2\x2\xB1\xB2\a\x13\x2\x2"+
+		"\xB2\x1B\x3\x2\x2\x2\xB3\xB4\b\xF\x1\x2\xB4\xB5\x5\x1E\x10\x2\xB5\xBE"+
+		"\x3\x2\x2\x2\xB6\xB7\f\x5\x2\x2\xB7\xB8\a\x14\x2\x2\xB8\xBD\x5\x1E\x10"+
+		"\x2\xB9\xBA\f\x4\x2\x2\xBA\xBB\a\x15\x2\x2\xBB\xBD\x5\x1E\x10\x2\xBC\xB6"+
+		"\x3\x2\x2\x2\xBC\xB9\x3\x2\x2\x2\xBD\xC0\x3\x2\x2\x2\xBE\xBC\x3\x2\x2"+
+		"\x2\xBE\xBF\x3\x2\x2\x2\xBF\x1D\x3\x2\x2\x2\xC0\xBE\x3\x2\x2\x2\xC1\xC2"+
+		"\x5\"\x12\x2\xC2\xC3\x5 \x11\x2\xC3\xC4\x5\"\x12\x2\xC4\x1F\x3\x2\x2\x2"+
+		"\xC5\xC6\t\x2\x2\x2\xC6!\x3\x2\x2\x2\xC7\xC8\b\x12\x1\x2\xC8\xC9\x5$\x13"+
+		"\x2\xC9\xCF\x3\x2\x2\x2\xCA\xCB\f\x4\x2\x2\xCB\xCC\t\x3\x2\x2\xCC\xCE"+
+		"\x5$\x13\x2\xCD\xCA\x3\x2\x2\x2\xCE\xD1\x3\x2\x2\x2\xCF\xCD\x3\x2\x2\x2"+
+		"\xCF\xD0\x3\x2\x2\x2\xD0#\x3\x2\x2\x2\xD1\xCF\x3\x2\x2\x2\xD2\xD3\b\x13"+
+		"\x1\x2\xD3\xD4\x5&\x14\x2\xD4\xDA\x3\x2\x2\x2\xD5\xD6\f\x4\x2\x2\xD6\xD7"+
+		"\t\x4\x2\x2\xD7\xD9\x5&\x14\x2\xD8\xD5\x3\x2\x2\x2\xD9\xDC\x3\x2\x2\x2"+
+		"\xDA\xD8\x3\x2\x2\x2\xDA\xDB\x3\x2\x2\x2\xDB%\x3\x2\x2\x2\xDC\xDA\x3\x2"+
+		"\x2\x2\xDD\xDE\a\a\x2\x2\xDE\xDF\x5\"\x12\x2\xDF\xE0\a\b\x2\x2\xE0\xE6"+
+		"\x3\x2\x2\x2\xE1\xE6\a$\x2\x2\xE2\xE6\a%\x2\x2\xE3\xE6\a#\x2\x2\xE4\xE6"+
+		"\x5\x18\r\x2\xE5\xDD\x3\x2\x2\x2\xE5\xE1\x3\x2\x2\x2\xE5\xE2\x3\x2\x2"+
+		"\x2\xE5\xE3\x3\x2\x2\x2\xE5\xE4\x3\x2\x2\x2\xE6\'\x3\x2\x2\x2\xE7\xE8"+
+		"\a!\x2\x2\xE8\xE9\a\x3\x2\x2\xE9)\x3\x2\x2\x2\xEA\xEB\a\"\x2\x2\xEB\xEC"+
+		"\a\x3\x2\x2\xEC+\x3\x2\x2\x2\x16.\x30\x41Gmr~\x81\x85\x92\x95\xA1\xA4"+
+		"\xAC\xAE\xBC\xBE\xCF\xDA\xE5";
 	public static readonly ATN _ATN =
 		new ATNDeserializer().Deserialize(_serializedATN.ToCharArray());
 }

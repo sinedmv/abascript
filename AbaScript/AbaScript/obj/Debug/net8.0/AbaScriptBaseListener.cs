@@ -36,6 +36,51 @@ using ParserRuleContext = Antlr4.Runtime.ParserRuleContext;
 [System.CLSCompliant(false)]
 public partial class AbaScriptBaseListener : IAbaScriptListener {
 	/// <summary>
+	/// Enter a parse tree produced by the <c>AndExpr</c>
+	/// labeled alternative in <see cref="AbaScriptParser.logicalExpr"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterAndExpr([NotNull] AbaScriptParser.AndExprContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by the <c>AndExpr</c>
+	/// labeled alternative in <see cref="AbaScriptParser.logicalExpr"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitAndExpr([NotNull] AbaScriptParser.AndExprContext context) { }
+
+	/// <summary>
+	/// Enter a parse tree produced by the <c>OrExpr</c>
+	/// labeled alternative in <see cref="AbaScriptParser.logicalExpr"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterOrExpr([NotNull] AbaScriptParser.OrExprContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by the <c>OrExpr</c>
+	/// labeled alternative in <see cref="AbaScriptParser.logicalExpr"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitOrExpr([NotNull] AbaScriptParser.OrExprContext context) { }
+
+	/// <summary>
+	/// Enter a parse tree produced by the <c>ConditionExpr</c>
+	/// labeled alternative in <see cref="AbaScriptParser.logicalExpr"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterConditionExpr([NotNull] AbaScriptParser.ConditionExprContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by the <c>ConditionExpr</c>
+	/// labeled alternative in <see cref="AbaScriptParser.logicalExpr"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitConditionExpr([NotNull] AbaScriptParser.ConditionExprContext context) { }
+
+	/// <summary>
 	/// Enter a parse tree produced by the <c>AddSub</c>
 	/// labeled alternative in <see cref="AbaScriptParser.expr"/>.
 	/// <para>The default implementation does nothing.</para>
@@ -338,6 +383,19 @@ public partial class AbaScriptBaseListener : IAbaScriptListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitBlock([NotNull] AbaScriptParser.BlockContext context) { }
+
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="AbaScriptParser.logicalExpr"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterLogicalExpr([NotNull] AbaScriptParser.LogicalExprContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="AbaScriptParser.logicalExpr"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitLogicalExpr([NotNull] AbaScriptParser.LogicalExprContext context) { }
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="AbaScriptParser.condition"/>.

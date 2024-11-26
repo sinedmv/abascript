@@ -46,19 +46,19 @@ returnStatement
 
 // Условная конструкция
 ifStatement
-    : 'if' '(' condition ')' block
-      ('elif' '(' condition ')' block)*
+    : 'if' '(' logicalExpr ')' block
+      ('elif' '(' logicalExpr ')' block)*
       ('else' block)?
     ;
 
 // Цикл while
 whileStatement
-    : 'while' '(' condition ')' block
+    : 'while' '(' logicalExpr ')' block
     ;
 
 // Цикл for
 forStatement
-    : 'for' '(' (variableDeclaration | assignment)? condition? ';' assignment? ')' block
+    : 'for' '(' (variableDeclaration | assignment)? logicalExpr? ';' assignment? ')' block
     ;
 
 // Определение функции
@@ -74,6 +74,13 @@ funcCall
 // Блок инструкций
 block
     : '{' (statement | funcCall)* '}'
+    ;
+
+// Логическое выражение
+logicalExpr
+    : logicalExpr '&&' condition  # AndExpr
+    | logicalExpr '||' condition  # OrExpr
+    | condition                   # ConditionExpr
     ;
 
 // Условие (логическое выражение)
