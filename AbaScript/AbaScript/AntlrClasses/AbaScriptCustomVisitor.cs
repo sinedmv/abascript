@@ -10,8 +10,15 @@ public class AbaScriptCustomVisitor : AbaScriptBaseVisitor<object>
         var varName = context.ID().GetText();
         object value = null;
 
-        if (context.expr() != null)
+        if (context.NUMBER() != null)
         {
+            // Array declaration with a specified size
+            int size = int.Parse(context.NUMBER().GetText());
+            value = new object[size];
+        }
+        else if (context.expr() != null)
+        {
+            // Regular variable initialization
             value = Visit(context.expr());
         }
 
@@ -21,22 +28,47 @@ public class AbaScriptCustomVisitor : AbaScriptBaseVisitor<object>
     }
 
     
-    public override object VisitVariable(AbaScriptParser.VariableContext context)
+    public override object VisitVariableorArrayAccess(AbaScriptParser.VariableorArrayAccessContext context)
     {
-        string variableName = context.GetText();
+        string variableName = context.ID().GetText();
+        object value;
 
-        if (!variables.TryGetValue(variableName, out var value))
-            throw new InvalidOperationException($"Переменная '{variableName}' не объявлена.");
+        if (context.expr() != null)
+        {
+            var index = (int)Visit(context.expr());
+            var array = (object[])variables[variableName];
+            value = array[index];
+        }
+        else
+        {
+            if (!variables.TryGetValue(variableName, out value))
+                throw new InvalidOperationException($"Переменная '{variableName}' не объявлена.");
+        }
 
         return value;
     }
     public override object VisitAssignment(AbaScriptParser.AssignmentContext context)
     {
         var varName = context.ID().GetText();
-        var value = Visit(context.expr());
-        variables[varName] = value;
 
-        Console.WriteLine($"Переменная {varName} обновлена: {value} (тип: {GetType(value)})");
+        if (context.expr() != null)
+        {
+            object value;
+            if (context.expr().Length == 2)
+            {
+                value = Visit(context.expr(1));
+                var index = (int)Visit(context.expr(0));
+                var array = (object[])variables[varName];
+                array[index] = value;
+            }
+            else
+            {
+                value = Visit(context.expr(0));
+                variables[varName] = value;
+            }
+            Console.WriteLine($"Переменная {varName} обновлена: {value} (тип: {GetType(value)})");
+        }
+        
         return null;
     }
 
@@ -60,12 +92,15 @@ public class AbaScriptCustomVisitor : AbaScriptBaseVisitor<object>
 
     private object Add(object left, object right)
     {
-        return left switch
+        if (left is int leftInt && right is int rightInt)
         {
-            string leftStr when right is string rightStr => leftStr + rightStr,
-            int leftInt when right is int rightInt => leftInt + rightInt,
-            _ => throw new InvalidOperationException($"Несовместимые типы для операции '+': {left}, {right}")
-        };
+            return leftInt + rightInt;
+        }
+        if (left is string leftStr && right is string rightStr)
+        {
+            return leftStr + rightStr;
+        }
+        throw new InvalidOperationException($"Несовместимые типы для операции '+': {left}, {right}");
     }
 
     private object Subtract(object left, object right)
@@ -131,6 +166,34 @@ public class AbaScriptCustomVisitor : AbaScriptBaseVisitor<object>
         throw new InvalidOperationException($"Несовместимые типы для операции '%': {left}, {right}");
     }
     
+    public override object VisitInputStatement(AbaScriptParser.InputStatementContext context)
+    {
+        var varName = context.ID().GetText();
+        Console.Write($"Введите значение для {varName}: ");
+        var input = Console.ReadLine();
+
+        if (context.expr() != null)
+        {
+            var index = (int)Visit(context.expr());
+            var array = (object[])variables[varName];
+            array[index] = TryParseNumber(input);
+        }
+        else
+        {
+            variables[varName] = TryParseNumber(input);
+        }
+
+        return null;
+    }
+
+    private object TryParseNumber(string input)
+    {
+        if (int.TryParse(input, out var number))
+        {
+            return number;
+        }
+        return input; // Return as string if not a number
+    }
     public override object VisitIfStatement(AbaScriptParser.IfStatementContext context)
     {
         for (int i = 0; i < context.logicalExpr().Length; i++)
@@ -216,22 +279,55 @@ public class AbaScriptCustomVisitor : AbaScriptBaseVisitor<object>
     public override object VisitForStatement(AbaScriptParser.ForStatementContext context)
     {
         // Initialize the loop variable
-        Visit(context.assignment(0));
+        if (context.variableDeclaration() != null)
+        {
+            Visit(context.variableDeclaration());
+        }
+        else if (context.assignment(0) != null)
+        {
+            Visit(context.assignment(0));
+        }
 
         while (true)
         {
             // Evaluate the loop condition
-            var conditionResult = Visit(context.logicalExpr());
-            if (conditionResult is not true)
+            if (context.logicalExpr() != null)
             {
-                break;
+                var conditionResult = Visit(context.logicalExpr());
+                if (conditionResult is not bool boolResult)
+                {
+                    throw new InvalidOperationException("The condition must evaluate to a boolean value.");
+                }
+                if (!boolResult)
+                {
+                    break;
+                }
             }
 
             // Execute the loop body
-            Visit(context.block());
+            try
+            {
+                Visit(context.block());
+            }
+            catch (BreakException)
+            {
+                break;
+            }
+            catch (ContinueException)
+            {
+                // Perform the increment step before continuing
+                if (context.assignment(1) != null)
+                {
+                    Visit(context.assignment(1));
+                }
+                continue;
+            }
 
             // Perform the increment step
-            Visit(context.assignment(1));
+            if (context.assignment(1) != null)
+            {
+                Visit(context.assignment(1));
+            }
         }
         return null;
     }

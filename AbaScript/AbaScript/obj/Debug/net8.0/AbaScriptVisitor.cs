@@ -113,12 +113,12 @@ public interface IAbaScriptVisitor<Result> : IParseTreeVisitor<Result> {
 	Result VisitString([NotNull] AbaScriptParser.StringContext context);
 
 	/// <summary>
-	/// Visit a parse tree produced by the <c>Variable</c>
+	/// Visit a parse tree produced by the <c>VariableorArrayAccess</c>
 	/// labeled alternative in <see cref="AbaScriptParser.factor"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitVariable([NotNull] AbaScriptParser.VariableContext context);
+	Result VisitVariableorArrayAccess([NotNull] AbaScriptParser.VariableorArrayAccessContext context);
 
 	/// <summary>
 	/// Visit a parse tree produced by the <c>FunctionCall</c>

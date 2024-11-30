@@ -16,22 +16,21 @@ statement
     | funcCall
     | breakStatement
     | continueStatement
-    | ';'                // Пустая строка
     ;
 
 // Объявление переменной
 variableDeclaration
-    : 'var' ID ('=' expr)? ';'
+    : 'var' ID ('[' NUMBER ']')? ('=' expr)? ';'
     ;
 
 // Присваивание значения переменной
 assignment
-    : ID '=' expr ';'
+    : (ID ('[' expr ']')?) '=' expr ';'
     ;
 
 // Ввод данных
 inputStatement
-    : 'input' '(' ID ')' ';'
+    : 'input' '(' (ID ('[' expr ']')?) ')' ';'
     ;
 
 // Вывод данных
@@ -68,12 +67,12 @@ functionDef
 
 // Вызов функции
 funcCall
-    : ID '(' (expr (',' expr)*)? ')' ';'
+    : ID '(' (expr (',' expr)*)? ')'
     ;
 
 // Блок инструкций
 block
-    : '{' (statement | funcCall)* '}'
+    : '{' statement* '}'
     ;
 
 // Логическое выражение
@@ -108,7 +107,7 @@ factor
     : '(' expr ')'              # Parens
     | NUMBER                    # Number
     | STRING                    # String
-    | ID                        # Variable
+    | ID ('[' expr ']')?        # VariableorArrayAccess
     | funcCall                  # FunctionCall
     ;
 

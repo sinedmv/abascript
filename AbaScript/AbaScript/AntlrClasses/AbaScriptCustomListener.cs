@@ -1,23 +1,28 @@
-﻿namespace AbaScript.AntlrClasses;
+﻿using Antlr4.Runtime;
+
+namespace AbaScript.AntlrClasses;
 
 using System;
 
-public class AbaScriptCustomListener : AbaScriptBaseListener
+using Antlr4.Runtime;
+
+class AbaScriptCustomListener : IAntlrErrorListener<int>, IAntlrErrorListener<IToken>
 {
-    public override void EnterVariableDeclaration(AbaScriptParser.VariableDeclarationContext context)
+    public bool HasErrors { get; private set; } = false;
+
+    public void SyntaxError(IRecognizer recognizer, int offendingSymbol, int line, int charPositionInLine, string msg, RecognitionException e)
     {
-        var varName = context.ID().GetText();
-        Console.WriteLine($"Объявлена переменная: {varName}");
+        HasErrors = true;
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine($"Lexer error at line {line}, position {charPositionInLine}: {msg}");
+        Console.ResetColor();
     }
 
-    public override void EnterAssignment(AbaScriptParser.AssignmentContext context)
+    public void SyntaxError(IRecognizer recognizer, IToken offendingSymbol, int line, int charPositionInLine, string msg, RecognitionException e)
     {
-        var varName = context.ID().GetText();
-        Console.WriteLine($"Присваивание переменной: {varName}");
-    }
-
-    public override void EnterOutputStatement(AbaScriptParser.OutputStatementContext context)
-    {
-        Console.WriteLine("Вывод данных:");
+        HasErrors = true;
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine($"Parser error at line {line}, position {charPositionInLine}: {msg}");
+        Console.ResetColor();
     }
 }

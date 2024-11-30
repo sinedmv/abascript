@@ -155,7 +155,7 @@ public partial class AbaScriptBaseVisitor<Result> : AbstractParseTreeVisitor<Res
 	public virtual Result VisitString([NotNull] AbaScriptParser.StringContext context) { return VisitChildren(context); }
 
 	/// <summary>
-	/// Visit a parse tree produced by the <c>Variable</c>
+	/// Visit a parse tree produced by the <c>VariableorArrayAccess</c>
 	/// labeled alternative in <see cref="AbaScriptParser.factor"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
@@ -164,7 +164,7 @@ public partial class AbaScriptBaseVisitor<Result> : AbstractParseTreeVisitor<Res
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	public virtual Result VisitVariable([NotNull] AbaScriptParser.VariableContext context) { return VisitChildren(context); }
+	public virtual Result VisitVariableorArrayAccess([NotNull] AbaScriptParser.VariableorArrayAccessContext context) { return VisitChildren(context); }
 
 	/// <summary>
 	/// Visit a parse tree produced by the <c>FunctionCall</c>

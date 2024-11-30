@@ -1,0 +1,7 @@
+C:\Users\raybe\abascript\AbaScript\LexerAndParserTesting\bin\Debug\net8.0\CoverletSourceRootsMapping_LexerAndParserTesting
+C:\Users\raybe\abascript\AbaScript\LexerAndParserTesting\obj\Debug\net8.0\LexerAndParserTesting.csproj.AssemblyReference.cache
+C:\Users\raybe\abascript\AbaScript\LexerAndParserTesting\obj\Debug\net8.0\LexerAndParserTesting.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\raybe\abascript\AbaScript\LexerAndParserTesting\obj\Debug\net8.0\LexerAndParserTesting.AssemblyInfoInputs.cache
+C:\Users\raybe\abascript\AbaScript\LexerAndParserTesting\obj\Debug\net8.0\LexerAndParserTesting.AssemblyInfo.cs
+C:\Users\raybe\abascript\AbaScript\LexerAndParserTesting\obj\Debug\net8.0\LexerAndParserTesting.csproj.CoreCompileInputs.cache
+C:\Users\raybe\abascript\AbaScript\LexerAndParserTesting\obj\Debug\net8.0\LexerAndParserTesting.sourcelink.json

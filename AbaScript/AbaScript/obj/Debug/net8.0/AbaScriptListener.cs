@@ -162,17 +162,17 @@ public interface IAbaScriptListener : IParseTreeListener {
 	void ExitString([NotNull] AbaScriptParser.StringContext context);
 
 	/// <summary>
-	/// Enter a parse tree produced by the <c>Variable</c>
+	/// Enter a parse tree produced by the <c>VariableorArrayAccess</c>
 	/// labeled alternative in <see cref="AbaScriptParser.factor"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterVariable([NotNull] AbaScriptParser.VariableContext context);
+	void EnterVariableorArrayAccess([NotNull] AbaScriptParser.VariableorArrayAccessContext context);
 	/// <summary>
-	/// Exit a parse tree produced by the <c>Variable</c>
+	/// Exit a parse tree produced by the <c>VariableorArrayAccess</c>
 	/// labeled alternative in <see cref="AbaScriptParser.factor"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitVariable([NotNull] AbaScriptParser.VariableContext context);
+	void ExitVariableorArrayAccess([NotNull] AbaScriptParser.VariableorArrayAccessContext context);
 
 	/// <summary>
 	/// Enter a parse tree produced by the <c>FunctionCall</c>
