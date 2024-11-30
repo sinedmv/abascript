@@ -4,6 +4,7 @@ public class AbaScriptCustomVisitor : AbaScriptBaseVisitor<object>
 {
     private readonly Dictionary<string, object> variables = new();
     private readonly Dictionary<string, (List<string> Parameters, AbaScriptParser.BlockContext Body)> functions = new();
+    private readonly Logger logger = new Logger();
 
     public override object VisitVariableDeclaration(AbaScriptParser.VariableDeclarationContext context)
     {
@@ -23,7 +24,7 @@ public class AbaScriptCustomVisitor : AbaScriptBaseVisitor<object>
         }
 
         variables[varName] = value;
-        Log($"Переменная {varName} объявлена со значением: {value} (тип: {GetType(value)})");
+        logger.Log($"Переменная {varName} объявлена со значением: {value} (тип: {GetType(value)})");
         return null;
     }
 
@@ -66,7 +67,7 @@ public class AbaScriptCustomVisitor : AbaScriptBaseVisitor<object>
                 value = Visit(context.expr(0));
                 variables[varName] = value;
             }
-            Console.WriteLine($"Переменная {varName} обновлена: {value} (тип: {GetType(value)})");
+            logger.Log($"Переменная {varName} обновлена: {value} (тип: {GetType(value)})");
         }
         
         return null;
@@ -80,7 +81,7 @@ public class AbaScriptCustomVisitor : AbaScriptBaseVisitor<object>
         // Determine the operator by checking the text of the middle child
         var operatorText = context.GetChild(1).GetText();
 
-        Console.WriteLine($"DEBUG: left={left}, right={right}, leftType={left?.GetType()}, rightType={right?.GetType()}");
+        logger.Log($"left={left}, right={right}, leftType={left?.GetType()}, rightType={right?.GetType()}");
 
         return operatorText switch
         {
@@ -120,7 +121,7 @@ public class AbaScriptCustomVisitor : AbaScriptBaseVisitor<object>
         // Determine the operator by checking the text of the middle child
         var operatorText = context.GetChild(1).GetText();
 
-        Console.WriteLine($"DEBUG: left={left}, right={right}, leftType={left?.GetType()}, rightType={right?.GetType()}");
+        logger.Log($"left={left}, right={right}, leftType={left?.GetType()}, rightType={right?.GetType()}");
 
         return operatorText switch
         {
@@ -375,7 +376,7 @@ public class AbaScriptCustomVisitor : AbaScriptBaseVisitor<object>
         var funcName = context.ID(0).GetText();
         var parameters = context.ID().Skip(1).Select(p => p.GetText()).ToList(); // Параметры функции
         functions[funcName] = (parameters, context.block());
-        Console.WriteLine($"Функция {funcName} определена с параметрами: {string.Join(", ", parameters)}");
+        logger.Log($"Функция {funcName} определена с параметрами: {string.Join(", ", parameters)}");
         return null;
     }
     
@@ -433,10 +434,5 @@ public class AbaScriptCustomVisitor : AbaScriptBaseVisitor<object>
             string => "STRING",
             _ => "UNKNOWN"
         };
-    }
-    
-    private static void Log(string message)
-    {
-        Console.WriteLine($"[LOG] {message}");
     }
 }

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AbaScript")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c269ec590ba18789b1fc1822dda72a2d5c06a901")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+25b01bc40676f363c0f6c1f91a844a664546ddc0")]
 [assembly: System.Reflection.AssemblyProductAttribute("AbaScript")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AbaScript")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
