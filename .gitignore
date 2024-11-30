@@ -1,5 +1,8 @@
-/AbaScript/AbaScript/bin/
-/AbaScript/AbaScript/obj/
+.AbaScript/AbaScript/bin/
+.AbaScript/AbaScript/obj/
+
+.AbaScript/Tests/bin/
+.AbaScript/Tests/obj/
 
 .vs/
 *.user
