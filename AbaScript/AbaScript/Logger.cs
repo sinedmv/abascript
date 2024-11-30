@@ -6,7 +6,7 @@ public class Logger
 
     public Logger()
     {
-        logFilePath = $"log_{DateTime.Now:yyyyMMdd_HHmmss}.txt";
+        logFilePath = $"log_{DateTime.Now:yyyyMMdd_HHmmss}.log";
     }
 
     public void Log(string message)
