@@ -279,7 +279,6 @@ public class AbaScriptCustomVisitor : AbaScriptBaseVisitor<object>
     
     public override object VisitForStatement(AbaScriptParser.ForStatementContext context)
     {
-        // Initialize the loop variable
         if (context.variableDeclaration() != null)
         {
             Visit(context.variableDeclaration());
@@ -424,6 +423,34 @@ public class AbaScriptCustomVisitor : AbaScriptBaseVisitor<object>
         var returnValue = Visit(context.expr());
         throw new ReturnException(returnValue);
     }
+    
+    public override object VisitFactor(AbaScriptParser.FactorContext context)
+    {
+        return context switch
+        {
+            AbaScriptParser.UnaryMinusContext unaryMinusContext => VisitUnaryMinus(unaryMinusContext),
+            AbaScriptParser.ParensContext parensContext => Visit(parensContext.expr()),
+            AbaScriptParser.NumberContext numberContext => VisitNumber(numberContext),
+            AbaScriptParser.StringContext stringContext => VisitString(stringContext),
+            AbaScriptParser.VariableorArrayAccessContext variableOrArrayAccessContext => VisitVariableorArrayAccess(
+                variableOrArrayAccessContext),
+            AbaScriptParser.FunctionalCallContext funcCallContext => VisitFuncCall(funcCallContext.funcCall()),
+            _ => throw new InvalidOperationException("Unsupported factor type")
+        };
+    }
+    
+    public override object VisitUnaryMinus(AbaScriptParser.UnaryMinusContext context)
+    {
+        var value = Visit(context.factor());
+
+        if (value is int intValue)
+        {
+            return -intValue;
+        }
+
+        throw new InvalidOperationException($"Несовместимый тип для унарного минуса: {value}");
+    }
+
 
     
     private string GetType(object value)

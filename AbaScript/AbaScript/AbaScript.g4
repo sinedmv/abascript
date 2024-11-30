@@ -104,11 +104,12 @@ term
     ;
 
 factor
-    : '(' expr ')'              # Parens
+    : '-' factor                 # UnaryMinus
+    | '(' expr ')'               # Parens
     | NUMBER                    # Number
     | STRING                    # String
     | ID ('[' expr ']')?        # VariableorArrayAccess
-    | funcCall                  # FunctionCall
+    | funcCall                  # FunctionalCall
     ;
 
 // Break statement
