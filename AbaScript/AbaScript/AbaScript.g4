@@ -108,7 +108,7 @@ factor
     | '(' expr ')'               # Parens
     | NUMBER                    # Number
     | STRING                    # String
-    | ID ('[' expr ']')?        # VariableorArrayAccess
+    | ID ('[' expr ']')?        # VariableOrArrayAccess
     | funcCall                  # FunctionalCall
     ;
 

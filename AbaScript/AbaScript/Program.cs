@@ -1,8 +1,10 @@
-﻿using AbaScript;
+﻿using System.Reflection;
+using AbaScript;
 using AbaScript.AntlrClasses;
 using Antlr4.Runtime;
 
-var input = System.IO.File.ReadAllText("C:\\Users\\raybe\\abascript\\AbaScript\\AbaScript\\example.as");
+var path = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "../../../../example.as";
+var input = System.IO.File.ReadAllText(path);
 var lexer = new AbaScriptLexer(new AntlrInputStream(input));
 var tokens = new CommonTokenStream(lexer);
 var parser = new AbaScriptParser(tokens);
