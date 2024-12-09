@@ -1,0 +1,6 @@
+D:\MyCode\RiderProjects\abascript\AbaScript\obj\Debug\net8.0\AbaScriptLexer.cs
+D:\MyCode\RiderProjects\abascript\AbaScript\obj\Debug\net8.0\AbaScriptParser.cs
+D:\MyCode\RiderProjects\abascript\AbaScript\obj\Debug\net8.0\AbaScriptListener.cs
+D:\MyCode\RiderProjects\abascript\AbaScript\obj\Debug\net8.0\AbaScriptBaseListener.cs
+D:\MyCode\RiderProjects\abascript\AbaScript\obj\Debug\net8.0\AbaScriptVisitor.cs
+D:\MyCode\RiderProjects\abascript\AbaScript\obj\Debug\net8.0\AbaScriptBaseVisitor.cs
